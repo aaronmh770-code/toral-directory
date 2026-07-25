@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>אלפון שיעור - ישיבת תות"ל</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --primary-color: #1b365d;
+            --accent-color: #c5a059;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121824;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --primary-color: #3b82f6;
+            --accent-color: #d97706;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Heebo', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-bottom: 40px;
+        }
+
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        .login-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .search-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .main-layout {
+            width: 100%;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .system-announcement {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            font-size: 0.95rem;
+        }
+        .system-announcement.warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        .system-announcement.birthday {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+        }
+        .dismiss-announcement-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .dismiss-announcement-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .filters-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-chip {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .filter-chip.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .filter-chip.tag-chip {
+            border-color: var(--accent-color);
+        }
+
+        .counter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .counter {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .category-group-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin: 25px 0 15px 0;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .contact-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .avatar, .card-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-color);
+        }
+
+        .avatar {
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .card-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .badge-tag {
+            background-color: rgba(197, 160, 89, 0.15);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .phone-text {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 8px 2px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-call { background-color: #2563eb; }
+        .btn-sms { background-color: #0d9488; }
+        .btn-mail { background-color: #d97706; }
+        .btn-copy { background-color: #64748b; }
+
+        .card-edit-actions {
+            display: flex;
+            gap: 5px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .btn-sm-action {
+            flex: 1;
+            font-size: 0.75rem;
+            padding: 4px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .contacts-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+
+        .contacts-table th, .contacts-table td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .contacts-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        #admin-panel {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--accent-color);
+        }
+
+        .admin-section-title {
+            margin: 20px 0 10px 0;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .request-item {
+            background: var(--bg-color);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .req-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-approve { background: #22c55e; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+        .btn-reject { background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+
+        .log-item {
+            font-size: 0.85rem;
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+            grid-column: 1 / -1;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .form-group {
+            margin-bottom: 12px;
+            text-align: right;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        /* Toast הודעת העתקה */
+        #copy-toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #22c55e;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 9999;
+            transition: transform 0.3s ease;
+        }
+        #copy-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <!-- הודעת הצלחה בהעתקת מספר -->
+    <div id="copy-toast"><i class="fa-solid fa-check"></i> מספר הטלפון הועתק ללוח!</div>
+
+    <!-- מסך כניסה / הרשמה -->
+    <div id="login-screen">
+        <div class="login-card">
+            <!-- טופס התחברות -->
+            <div id="login-form-container">
+                <h2>כניסה לאלפון הישיבה</h2>
+                <p>נא להזין כתובת מייל וסיסמה כדי להמשיך</p>
+                <div class="form-group">
+                    <label>כתובת מייל</label>
+                    <input type="email" id="login-email">
+                </div>
+                <div class="form-group">
+                    <label>סיסמה</label>
+                    <input type="password" id="login-password">
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 0.85rem;">
+                    <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                        <input type="checkbox" id="remember-me" style="width: auto;"> זכור אותי
+                    </label>
+                    <a href="#" onclick="openForgotPasswordModal()" style="color: var(--primary-color); text-decoration: none;">שכחת סיסמה?</a>
+                </div>
+                <button class="btn-submit" onclick="handleLogin()">הכנס למערכת</button>
+                <div style="margin-top: 15px; font-size: 0.85rem;">
+                    עדיין אין לך חשבון? <a href="#" onclick="switchAuthMode('signup')" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">הירשם כאן</a>
+                </div>
+            </div>
+
+            <!-- טופס הרשמה -->
+            <div id="signup-form-container" style="display: none;">
+                <h2>הרשמה לאלפון הישיבה</h2>
+                <p>הכנס את הפרטים שלך כדי ליצור חשבון חדש</p>
+                <div class="form-group">
+                    <label>שם פרטי</label>
+                    <input type="text" id="signup-firstname">
+                </div>
+                <div class="form-group">
+                    <label>כתובת מייל</label>
+                    <input type="email" id="signup-email">
+                </div>
+                <div class="form-group">
+                    <label>מספר טלפון</label>
+                    <input type="text" id="signup-phone" placeholder="050-0000000">
+                </div>
+                <div class="form-group">
+                    <label>סיסמה חדשה</label>
+                    <input type="password" id="signup-password">
+                </div>
+                <button class="btn-submit" style="background: #22c55e;" onclick="handleSignup()">הירשם והתחבר</button>
+                <div style="margin-top: 15px; font-size: 0.85rem;">
+                    כבר יש לך חשבון? <a href="#" onclick="switchAuthMode('login')" style="color: var(--primary-color); font-weight: 700; text-decoration: none;">התחבר כאן</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- חלון איפוס סיסמה קופץ -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <h3>איפוס סיסמה מהיר</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">הזן את המייל שלך וקוד איפוס יופיע לך מיד על המסך.</p>
+            <div class="form-group">
+                <label>כתובת מייל</label>
+                <input type="email" id="reset-email">
+            </div>
+            <button class="btn-submit" onclick="sendResetCode()">הצג לי קוד איפוס</button>
+            
+            <div id="verify-code-section" style="display: none; margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                <div class="form-group">
+                    <label>הקלד את הקוד שקיבלת</label>
+                    <input type="text" id="entered-code">
+                </div>
+                <div class="form-group">
+                    <label>סיסמה חדשה</label>
+                    <input type="password" id="new-reset-password">
+                </div>
+                <button class="btn-submit" style="background: #22c55e;" onclick="verifyAndResetPassword()">אפס סיסמה והתחבר</button>
+            </div>
+
+            <button class="btn-submit" style="background: #94a3b8; margin-top: 10px;" onclick="closeForgotPasswordModal()">ביטול</button>
+        </div>
+    </div>
+
+    <!-- האפליקציה הראשית -->
+    <div id="app-container" style="display: none;">
+        <header>
+            <div class="header-content">
+                <div class="top-bar">
+                    <h1>אלפון שיעור תשפ"ה - ישיבת תות"ל</h1>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span id="logged-user-badge" style="font-size: 0.85rem; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 12px;"></span>
+                        <button class="control-btn" style="padding: 4px 10px; font-size:0.75rem;" onclick="handleLogout()">התנתק</button>
+                    </div>
+                </div>
+                <div class="search-area">
+                    <div class="header-controls">
+                        <button class="control-btn" style="background-color: var(--accent-color);" onclick="openAdminPanel()">
+                            <i class="fa-solid fa-shield-halved"></i> פאנל מנהל (<span id="req-count">0</span>)
+                        </button>
+                        <button class="control-btn" id="addContactBtn" onclick="openRequestModal('add', {})">
+                            <i class="fa-solid fa-plus"></i> הוסף בחור
+                        </button>
+                        <button class="control-btn" onclick="toggleViewMode()">
+                            <i id="view-icon" class="fa-solid fa-table-cells"></i> <span id="view-text">תצוגת טבלה</span>
+                        </button>
+                        <button class="control-btn" onclick="toggleTheme()">
+                            <i id="theme-icon" class="fa-solid fa-moon"></i>
+                        </button>
+                    </div>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="חיפוש מהיר לפי שם, עיר, תגיות או טלפון..." oninput="filterContacts()">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <div id="systemAnnouncementContainer"></div>
+            <div id="birthdayAnnouncementContainer"></div>
+
+            <!-- פאנל ניהול מתקדם -->
+            <div id="admin-panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: var(--accent-color); margin:0;"><i class="fa-solid fa-user-gear"></i> ניהול מערכת מתקדם</h3>
+                    <button class="btn-submit" style="background: #64748b; width: auto; padding: 5px 12px; margin:0;" onclick="closeAdminPanel()">סגור פאנל</button>
+                </div>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-users-viewfinder"></i> ניהול משתמשים שנרשמו למערכת</span></div>
+                <div id="admin-users-list" style="background: var(--bg-color); border-radius: 8px; max-height: 200px; overflow-y: auto; border: 1px solid var(--border-color); padding: 5px; margin-bottom: 15px;">
+                    <p style="color: var(--text-secondary); text-align: center; padding: 10px;">אין משתמשים רשומים כרגע.</p>
+                </div>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-folder-plus"></i> ניהול קטגוריות / שיעורים באלפון</span></div>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" id="new-category-name" placeholder="שם קטגוריה חדשה..." style="flex: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color);">
+                    <button class="btn-submit" style="width: auto; margin:0; padding: 8px 15px;" onclick="addNewCategory()">הוסף קטגוריה</button>
+                </div>
+                <div id="admin-categories-list" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;"></div>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-tags"></i> ניהול ועריכת תגיות מותאמות אישית</span></div>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" id="new-tag-name" placeholder="תגית חדשה (למשל: אחראי פנימייה)..." style="flex: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: 6px; background: var(--bg-color); color: var(--text-color);">
+                    <button class="btn-submit" style="width: auto; margin:0; padding: 8px 15px; background: var(--accent-color);" onclick="addNewTag()">הוסף תגית</button>
+                </div>
+                <div id="admin-tags-list" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;"></div>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-database"></i> גיבוי וסנכרון נתונים (קובץ JSON)</span></div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                    <button class="btn-submit" style="width: auto; margin:0; background: #2563eb;" onclick="exportDataJson()"><i class="fa-solid fa-download"></i> ייצא גיבוי נתונים</button>
+                    <label class="btn-submit" style="width: auto; margin:0; background: #059669; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <i class="fa-solid fa-upload"></i> ייבא גיבוי נתונים
+                        <input type="file" id="importFileJson" accept=".json" onchange="importDataJson(event)" style="display: none;">
+                    </label>
+                </div>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-clock-rotate-left"></i> בקשות ממתינות לאישור</span></div>
+                <div id="admin-requests-list">
+                    <p style="color: var(--text-secondary);">אין בקשות ממתינות כרגע.</p>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <button class="btn-approve" style="padding: 5px 10px; font-size:0.85rem;" onclick="approveAllRequests()">אשר הכל</button>
+                    <button class="btn-reject" style="padding: 5px 10px; font-size:0.85rem;" onclick="rejectAllRequests()">דחה הכל</button>
+                </div>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-bullhorn"></i> פרסום הודעת מערכת</span></div>
+                <div class="form-group">
+                    <label>טקסט ההודעה</label>
+                    <input type="text" id="admin-announcement-text">
+                </div>
+                <div class="form-group">
+                    <label>סוג הודעה</label>
+                    <select id="admin-announcement-type">
+                        <option value="info">מידע (כחול)</option>
+                        <option value="warning">התרעה חשובה (כתום)</option>
+                    </select>
+                </div>
+                <button class="btn-submit" style="background: var(--accent-color); width: auto; padding: 6px 15px;" onclick="saveSystemAnnouncement()">פרסם הודעת מערכת</button>
+
+                <div class="admin-section-title"><span><i class="fa-solid fa-lock"></i> שינוי סיסמת מנהל</span></div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                    <div class="form-group">
+                        <input type="password" id="admin-new-pass" placeholder="סיסמה חדשה...">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn-submit" style="margin:0; padding: 8px;" onclick="updateAdminPassword()">עדכן סיסמה</button>
+                    </div>
+                </div>
+
+                <div class="admin-section-title">
+                    <span><i class="fa-solid fa-list-check"></i> יומן פעולות מנהל</span>
+                    <button class="btn-reject" style="padding: 3px 8px; font-size: 0.75rem;" onclick="clearLogs()">מחק יומן</button>
+                </div>
+                <div id="admin-logs-list" style="background: var(--bg-color); border-radius: 8px; max-height: 150px; overflow-y: auto; border: 1px solid var(--border-color); padding: 5px;"></div>
+            </div>
+
+            <div class="filters-bar" id="filtersBar"></div>
+
+            <div class="counter-bar">
+                <div class="counter" id="counter">מציג את כל אנשי הקשר</div>
+            </div>
+            
+            <div id="contactsContainer"></div>
+        </div>
+    </div>
+
+    <!-- חלון בקשות / הוספה / עריכה -->
+    <div class="modal" id="requestModal">
+        <div class="modal-content">
+            <h3 id="modal-title" style="margin-bottom: 15px;">בקשת הוספה / עדכון</h3>
+            <input type="hidden" id="req-type">
+            <input type="hidden" id="req-original-id">
+            <input type="hidden" id="req-image-base64">
+            <div class="form-group">
+                <label>שם מלא</label>
+                <input type="text" id="req-name">
+            </div>
+            <div class="form-group">
+                <label>עיר מגורים</label>
+                <input type="text" id="req-city">
+            </div>
+            <div class="form-group">
+                <label>קטגוריה / שיעור</label>
+                <select id="req-class" style="width:100%; padding:8px; border-radius:6px; background:var(--bg-color); color:var(--text-color); border:1px solid var(--border-color);"></select>
+            </div>
+            <div class="form-group">
+                <label>תגית מיוחדת (אופציונלי)</label>
+                <select id="req-tag" style="width:100%; padding:8px; border-radius:6px; background:var(--bg-color); color:var(--text-color); border:1px solid var(--border-color);"></select>
+            </div>
+            <div class="form-group">
+                <label>תאריך לידה (לועזי או עברי)</label>
+                <input type="text" id="req-birthday" placeholder="לדוגמה: 15/08 או ט' אלול">
+            </div>
+            <div class="form-group">
+                <label>מספר טלפון</label>
+                <input type="text" id="req-phone">
+            </div>
+            <div class="form-group">
+                <label>כתובת אימייל (אופציונלי)</label>
+                <input type="email" id="req-email" placeholder="example@gmail.com">
+            </div>
+            <div class="form-group">
+                <label>העלאת תמונת פרופיל</label>
+                <input type="file" id="req-file" accept="image/*" onchange="handleImageUpload(event)" style="background:var(--bg-color); padding: 6px; border:1px solid var(--border-color); border-radius:6px; width:100%; cursor:pointer;">
+            </div>
+            <button class="btn-submit" onclick="submitContactRequest()">שלח בקשה לאישור מנהל</button>
+            <button class="btn-submit" style="background: #94a3b8; margin-top: 8px;" onclick="closeRequestModal()">ביטול</button>
+        </div>
+    </div>
+
+    <!-- חלון כרטיס אישי -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content" style="text-align: center;">
+            <div id="profile-modal-avatar-area" style="display: flex; justify-content: center; margin-bottom: 15px;"></div>
+            <h2 id="profile-modal-name" style="margin-bottom: 8px;"></h2>
+            <div class="badges" style="justify-content: center; margin-bottom: 15px;">
+                <span class="badge" id="profile-modal-city"></span>
+                <span class="badge" id="profile-modal-class"></span>
+                <span class="badge badge-tag" id="profile-modal-tag" style="display:none;"></span>
+                <span class="badge" id="profile-modal-birthday" style="display:none; background:rgba(236, 72, 153, 0.1); color:#ec4899; border-color:#ec4899;"></span>
+            </div>
+            <div id="profile-modal-phone" style="font-size: 1.2rem; font-weight: 700; color: var(--primary-color); margin-bottom: 5px;"></div>
+            <div id="profile-modal-email" style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px;"></div>
+            
+            <div class="card-actions" style="margin-bottom: 10px;">
+                <a href="#" id="profile-modal-call" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> חיוג</a>
+                <a href="#" id="profile-modal-sms" class="btn-action btn-sms"><i class="fa-solid fa-comment-sms"></i> SMS</a>
+                <a href="#" id="profile-modal-mail" class="btn-action btn-mail"><i class="fa-solid fa-envelope"></i> מייל</a>
+                <button id="profile-modal-copy" class="btn-action btn-copy" onclick=""><i class="fa-solid fa-copy"></i> העתק</button>
+            </div>
+            <button class="btn-submit" style="background: #94a3b8; margin-top: 10px;" onclick="closeProfileModal()">סגור</button>
+        </div>
+    </div>
+
+    <script>
+        // בדיקה בעת טעינת העמוד האם משתמש סומן כ"זכור אותי"
+        window.addEventListener('DOMContentLoaded', () => {
+            const rememberedUser = localStorage.getItem('yeshiva_remembered_user');
+            if (rememberedUser) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('app-container').style.display = 'block';
+                document.getElementById('logged-user-badge').innerText = rememberedUser;
+                refreshApp();
+            } else {
+                const loggedUser = sessionStorage.getItem('yeshiva_logged_user');
+                if (loggedUser) {
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('app-container').style.display = 'block';
+                    document.getElementById('logged-user-badge').innerText = loggedUser;
+                    refreshApp();
+                }
+            }
+        });
+
+        function switchAuthMode(mode) {
+            if(mode === 'signup') {
+                document.getElementById('login-form-container').style.display = 'none';
+                document.getElementById('signup-form-container').style.display = 'block';
+            } else {
+                document.getElementById('signup-form-container').style.display = 'none';
+                document.getElementById('login-form-container').style.display = 'block';
+            }
+        }
+
+        function handleSignup() {
+            const firstName = document.getElementById('signup-firstname').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const phone = document.getElementById('signup-phone').value.trim();
+            const pass = document.getElementById('signup-password').value.trim();
+
+            if(!firstName) { alert('נא להזין שם פרטי'); return; }
+            if(!email || !email.includes('@')) { alert('נא להזין כתובת מייל תקינה'); return; }
+            if(!phone) { alert('נא להזין מספר טלפון'); return; }
+            if(!pass) { alert('נא להזין סיסמה'); return; }
+
+            localStorage.setItem('pass_' + email, pass);
+
+            let registeredUsers = getStoredRegisteredUsers();
+            if(!registeredUsers.some(u => u.email === email)) {
+                registeredUsers.push({
+                    id: Date.now(),
+                    firstName,
+                    email,
+                    phone,
+                    regTime: new Date().toLocaleString('he-IL')
+                });
+                localStorage.setItem('yeshiva_registered_users', JSON.stringify(registeredUsers));
+                addLog(`משתמש חדש נרשם למערכת: ${firstName} (${email})`);
+            }
+
+            sessionStorage.setItem('yeshiva_logged_user', email);
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+            document.getElementById('logged-user-badge').innerText = email;
+            refreshApp();
+        }
+
+        function getStoredRegisteredUsers() {
+            const data = localStorage.getItem('yeshiva_registered_users');
+            if (data) { try { return JSON.parse(data); } catch(e) {} }
+            return [];
+        }
+
+        function deleteRegisteredUser(userId) {
+            if(!confirm('האם אתה בטוח שברצונך למחוק משתמש זה מרשימת הנרשמים?')) return;
+            let users = getStoredRegisteredUsers();
+            users = users.filter(u => u.id !== userId);
+            localStorage.setItem('yeshiva_registered_users', JSON.stringify(users));
+            updateAdminPanel();
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const pass = document.getElementById('login-password').value.trim();
+            const rememberMe = document.getElementById('remember-me').checked;
+
+            if(!email || !email.includes('@')) { alert('נא להזין כתובת מייל תקינה'); return; }
+            if(!pass) { alert('נא להזין סיסמה'); return; }
+
+            const adminPass = localStorage.getItem('yeshiva_admin_pass') || 'rebbe770';
+            const customUserPass = localStorage.getItem('pass_' + email);
+            const validPass = customUserPass ? customUserPass : (pass === '1234' || pass === adminPass);
+
+            if(!validPass) { alert('סיסמה שגויה!'); return; }
+
+            if (rememberMe) {
+                localStorage.setItem('yeshiva_remembered_user', email);
+            } else {
+                sessionStorage.setItem('yeshiva_logged_user', email);
+            }
+
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-container').style.display = 'block';
+            document.getElementById('logged-user-badge').innerText = email;
+            refreshApp();
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('yeshiva_logged_user');
+            localStorage.removeItem('yeshiva_remembered_user');
+            location.reload();
+        }
+
+        let generatedResetCode = "";
+        let resetTargetEmail = "";
+
+        function openForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'flex';
+            document.getElementById('verify-code-section').style.display = 'none';
+            document.getElementById('reset-email').value = '';
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+        }
+
+        function sendResetCode() {
+            const email = document.getElementById('reset-email').value.trim();
+            if(!email || !email.includes('@')) { alert('נא להזין כתובת מייל תקינה'); return; }
+
+            resetTargetEmail = email;
+            generatedResetCode = Math.floor(1000 + Math.random() * 9000).toString();
+
+            alert('קוד האיפוס שלך הוא: ' + generatedResetCode);
+            document.getElementById('verify-code-section').style.display = 'block';
+        }
+
+        function verifyAndResetPassword() {
+            const entered = document.getElementById('entered-code').value.trim();
+            const newPass = document.getElementById('new-reset-password').value.trim();
+
+            if(entered !== generatedResetCode) { alert('הקוד שגויי!'); return; }
+            if(!newPass) { alert('נא להזין סיסמה חדשה'); return; }
+
+            localStorage.setItem('pass_' + resetTargetEmail, newPass);
+            alert('הסיסמה אופסה בהצלחה! כעת תוכל להתחבר איתה.');
+            closeForgotPasswordModal();
+        }
+
+        function copyPhoneNumber(phone, event) {
+            if(event) event.stopPropagation();
+            navigator.clipboard.writeText(phone).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            }).catch(err => {
+                alert('שגיאה בהעתקת המספר');
+            });
+        }
+
+        function getStoredCategories() {
+            const data = localStorage.getItem('yeshiva_categories');
+            if (data) { try { return JSON.parse(data); } catch(e) {} }
+            return ["שיעור א'", "שיעור ב'", "שיעור ג'"];
+        }
+
+        function getStoredTags() {
+            const data = localStorage.getItem('yeshiva_tags');
+            if (data) { try { return JSON.parse(data); } catch(e) {} }
+            return ["אחראי פנימייה", "בעל מנגן", "חבר וועד"];
+        }
+
+        function getStoredContacts() {
+            const data = localStorage.getItem('yeshiva_contacts');
+            if (data) { try { return JSON.parse(data); } catch(e) {} }
+            return [
+                { id: 1, name: "אברימי בורגן", city: "ראשון לציון", class: "שיעור ג'", tag: "בעל מנגן", birthday: "15/08", phone: "050-1234567", email: "avremi@gmail.com", image: "" },
+                { id: 2, name: "מנחם מענדל הכהן", city: "כפר חב\"ד", class: "שיעור ג'", tag: "אחראי פנימייה", birthday: "20/07", phone: "052-7654321", email: "menachem@gmail.com", image: "" },
+                { id: 3, name: "לוי יצחק אבאזאדע", city: "ירושלים", class: "שיעור ב'", tag: "חבר וועד", birthday: "01/01", phone: "054-9876543", email: "levy@gmail.com", image: "" },
+                { id: 4, name: "שמואל יוסף סגל", city: "צפת", class: "שיעור א'", tag: "", birthday: "", phone: "053-1122334", email: "", image: "" }
+            ];
+        }
+
+        function getStoredRequests() {
+            const data = localStorage.getItem('yeshiva_requests');
+            if (data) { try { return JSON.parse(data); } catch(e) {} }
+            return [];
+        }
+
+        function getStoredLogs() {
+            const data = localStorage.getItem('yeshiva_logs');
+            if (data) { try { return JSON.parse(data); } catch(e) {} }
+            return [];
+        }
+
+        function addLog(actionDescription) {
+            let logs = getStoredLogs();
+            const timeStr = new Date().toLocaleString('he-IL');
+            logs.unshift({ time: timeStr, text: actionDescription });
+            if(logs.length > 50) logs.pop();
+            localStorage.setItem('yeshiva_logs', JSON.stringify(logs));
+        }
+
+        function clearLogs() {
+            if(!confirm('האם אתה בטוח שברצונך למחוק את כל יומן הפעולות?')) return;
+            localStorage.removeItem('yeshiva_logs');
+            updateAdminPanel();
+        }
+
+        function exportDataJson() {
+            const backupData = {
+                categories: getStoredCategories(),
+                tags: getStoredTags(),
+                contacts: getStoredContacts(),
+                requests: getStoredRequests(),
+                logs: getStoredLogs(),
+                registeredUsers: getStoredRegisteredUsers()
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", "yeshiva_directory_backup.json");
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+            addLog("בוצע ייצוי גיבוי נתונים מלא (JSON)");
+        }
+
+        function importDataJson(event) {
+            const file = event.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if(parsed.contacts) localStorage.setItem('yeshiva_contacts', JSON.stringify(parsed.contacts));
+                    if(parsed.categories) localStorage.setItem('yeshiva_categories', JSON.stringify(parsed.categories));
+                    if(parsed.tags) localStorage.setItem('yeshiva_tags', JSON.stringify(parsed.tags));
+                    if(parsed.requests) localStorage.setItem('yeshiva_requests', JSON.stringify(parsed.requests));
+                    if(parsed.logs) localStorage.setItem('yeshiva_logs', JSON.stringify(parsed.logs));
+                    if(parsed.registeredUsers) localStorage.setItem('yeshiva_registered_users', JSON.stringify(parsed.registeredUsers));
+                    addLog("בוצע ייבוא ושחזור נתונים מקובץ גיבוי");
+                    alert('הנתונים שוחזרו בהצלחה!');
+                    refreshApp();
+                } catch(err) {
+                    alert('שגיאה בקריאת קובץ הגיבוי. הקובץ אינו תקין.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        let currentView = 'grid';
+        let currentFilter = 'all';
+
+        function refreshApp() {
+            renderSystemAnnouncement();
+            renderBirthdayAnnouncement();
+            renderFilterChips();
+            renderFormSelectOptions();
+            filterContacts();
+            updateReqCountBadge();
+        }
+
+        function renderFilterChips() {
+            const categories = getStoredCategories();
+            const tags = getStoredTags();
+            const bar = document.getElementById('filtersBar');
+            
+            let html = `<button class="filter-chip ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all', this)">הכל</button>`;
+            categories.forEach(cat => {
+                html += `<button class="filter-chip ${currentFilter === cat ? 'active' : ''}" onclick="setFilter('${cat}', this)">${cat}</button>`;
+            });
+            tags.forEach(tag => {
+                html += `<button class="filter-chip tag-chip ${currentFilter === tag ? 'active' : ''}" onclick="setFilter('${tag}', this)"><i class="fa-solid fa-tag"></i> ${tag}</button>`;
+            });
+            bar.innerHTML = html;
+        }
+
+        function renderFormSelectOptions() {
+            const categories = getStoredCategories();
+            const tags = getStoredTags();
+            
+            const selectEl = document.getElementById('req-class');
+            if(selectEl) {
+                selectEl.innerHTML = categories.map(c => `<option value="${c}">${c}</option>`).join('');
+            }
+
+            const tagSelectEl = document.getElementById('req-tag');
+            if(tagSelectEl) {
+                tagSelectEl.innerHTML = `<option value="">ללא תגית</option>` + tags.map(t => `<option value="${t}">${t}</option>`).join('');
+            }
+        }
+
+        function addNewCategory() {
+            const input = document.getElementById('new-category-name');
+            const catName = input.value.trim();
+            if(!catName) { alert('נא להזין שם קטגוריה'); return; }
+            
+            let categories = getStoredCategories();
+            if(categories.includes(catName)) { alert('הקטגוריה כבר קיימת'); return; }
+
+            categories.push(catName);
+            localStorage.setItem('yeshiva_categories', JSON.stringify(categories));
+            input.value = '';
+            addLog(`נוספה קטגוריה חדשה: ${catName}`);
+            refreshApp();
+            updateAdminPanel();
+            alert('הקטגוריה נוספה בהצלחה!');
+        }
+
+        function addNewTag() {
+            const input = document.getElementById('new-tag-name');
+            const tagName = input.value.trim();
+            if(!tagName) { alert('נא להזין שם תגית'); return; }
+            
+            let tags = getStoredTags();
+            if(tags.includes(tagName)) { alert('התגית כבר קיימת'); return; }
+
+            tags.push(tagName);
+            localStorage.setItem('yeshiva_tags', JSON.stringify(tags));
+            input.value = '';
+            addLog(`נוספה תגית חדשה: ${tagName}`);
+            refreshApp();
+            updateAdminPanel();
+            alert('התגית נוספה בהצלחה!');
+        }
+
+        function editTagName(oldTagName) {
+            const newName = prompt(`הכנס שם חדש לתגית "${oldTagName}":`, oldTagName);
+            if(newName === null) return;
+            const trimmedName = newName.trim();
+            if(!trimmedName) { alert('שם התגית לא יכול להיות ריק'); return; }
+
+            let tags = getStoredTags();
+            if(tags.includes(trimmedName)) { alert('תגית בשם זה כבר קיימת!'); return; }
+
+            tags = tags.map(t => t === oldTagName ? trimmedName : t);
+            localStorage.setItem('yeshiva_tags', JSON.stringify(tags));
+
+            let contacts = getStoredContacts();
+            let updatedCount = 0;
+            contacts = contacts.map(c => {
+                if(c.tag === oldTagName) {
+                    c.tag = trimmedName;
+                    updatedCount++;
+                }
+                return c;
+            });
+            localStorage.setItem('yeshiva_contacts', JSON.stringify(contacts));
+
+            addLog(`שמה של התגית "${oldTagName}" שונה ל-"${trimmedName}" (עודכנו ${updatedCount} אנשי קשר)`);
+            if(currentFilter === oldTagName) {
+                currentFilter = trimmedName;
+            }
+            refreshApp();
+            updateAdminPanel();
+            alert(`התגית עודכנה בהצלחה! (עודכנו ${updatedCount} אנשי קשר משויכים)`);
+        }
+
+        function renderSystemAnnouncement() {
+            const container = document.getElementById('systemAnnouncementContainer');
+            const dismissed = localStorage.getItem('yeshiva_announcement_dismissed');
+            if(dismissed === 'true') { container.innerHTML = ''; return; }
+
+            const announcement = JSON.parse(localStorage.getItem('yeshiva_announcement') || 'null');
+            if(!announcement || !announcement.text) { container.innerHTML = ''; return; }
+            
+            const cssClass = announcement.type === 'warning' ? 'system-announcement warning' : 'system-announcement';
+            container.innerHTML = `
+                <div class="${cssClass}">
+                    <div><i class="fa-solid fa-circle-info"></i> <strong>הודעת מערכת:</strong> ${announcement.text}</div>
+                    <button class="dismiss-announcement-btn" onclick="dismissSystemAnnouncement()" title="הסתר/הורד הודעה"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `;
+        }
+
+        function dismissSystemAnnouncement() {
+            localStorage.setItem('yeshiva_announcement_dismissed', 'true');
+            document.getElementById('systemAnnouncementContainer').innerHTML = '';
+        }
+
+        function renderBirthdayAnnouncement() {
+            const container = document.getElementById('birthdayAnnouncementContainer');
+            const dismissed = localStorage.getItem('yeshiva_birthday_dismissed');
+            if(dismissed === 'true') { container.innerHTML = ''; return; }
+
+            const contacts = getStoredContacts();
+            const today = new Date();
+            const currentDay = today.getDate();
+            const currentMonth = today.getMonth() + 1;
+
+            let birthdayBoys = [];
+            contacts.forEach(c => {
+                if(!c.birthday) return;
+                const parts = c.birthday.split('/');
+                if(parts.length === 2) {
+                    const bDay = parseInt(parts[0], 10);
+                    const bMonth = parseInt(parts[1], 10);
+                    
+                    if(bMonth === currentMonth && bDay >= currentDay && bDay <= currentDay + 7) {
+                        birthdayBoys.push(`${c.name} (${c.birthday})`);
+                    }
+                }
+            });
+
+            if(birthdayBoys.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="system-announcement birthday">
+                    <div><i class="fa-solid fa-cake-candles"></i> <strong>חוגגים השבוע יום הולדת:</strong> ${birthdayBoys.join(', ')} מזל טוב!</div>
+                    <button class="dismiss-announcement-btn" onclick="dismissBirthdayAnnouncement()" title="הסתר/הורד הודעה"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            `;
+        }
+
+        function dismissBirthdayAnnouncement() {
+            localStorage.setItem('yeshiva_birthday_dismissed', 'true');
+            document.getElementById('birthdayAnnouncementContainer').innerHTML = '';
+        }
+
+        function saveSystemAnnouncement() {
+            const text = document.getElementById('admin-announcement-text').value.trim();
+            const type = document.getElementById('admin-announcement-type').value;
+            localStorage.setItem('yeshiva_announcement', JSON.stringify({ text, type }));
+            localStorage.removeItem('yeshiva_announcement_dismissed');
+            addLog(`פורסמה הודעת מערכת חדשה`);
+            renderSystemAnnouncement();
+            alert('הודעת המערכת עודכנה!');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) { document.getElementById('req-image-base64').value = e.target.result; };
+            reader.readAsDataURL(file);
+        }
+
+        function renderContacts(data) {
+            const container = document.getElementById('contactsContainer');
+            document.getElementById('counter').innerText = `מציג ${data.length} אנשי קשר`;
+
+            if(data.length === 0) {
+                container.innerHTML = '<div class="no-results">לא נמצאו אנשי קשר תחת סינון זה</div>';
+                return;
+            }
+
+            const categories = getStoredCategories();
+            let htmlOutput = '';
+
+            categories.forEach(cat => {
+                const catContacts = data.filter(c => c.class === cat);
+                if(catContacts.length === 0) return;
+
+                htmlOutput += `<div class="category-group-title"><i class="fa-solid fa-folder-open"></i> ${cat} (${catContacts.length})</div>`;
+
+                if(currentView === 'grid') {
+                    htmlOutput += `<div class="contacts-grid">` + catContacts.map(contact => {
+                        const cleanPhone = contact.phone.replace(/-/g, '');
+                        const initials = contact.name.split(' ').map(n => n[0]).join('.');
+                        const avatarHtml = contact.image ? `<img src="${contact.image}" class="card-img" alt="${contact.name}">` : `<div class="avatar">${initials}</div>`;
+                        const tagBadge = contact.tag ? `<span class="badge badge-tag"><i class="fa-solid fa-tag"></i> ${contact.tag}</span>` : '';
+                        const bdayBadge = contact.birthday ? `<span class="badge" style="background:rgba(236, 72, 153, 0.1); color:#ec4899; border-color:#ec4899;"><i class="fa-solid fa-cake-candles"></i> ${contact.birthday}</span>` : '';
+                        
+                        const emailLink = contact.email ? `<a href="mailto:${contact.email}" class="btn-action btn-mail" onclick="event.stopPropagation()"><i class="fa-solid fa-envelope"></i> מייל</a>` : `<button class="btn-action btn-mail" style="opacity: 0.4; cursor: not-allowed;" disabled onclick="event.stopPropagation()"><i class="fa-solid fa-envelope"></i> מייל</button>`;
+
+                        return `
+                            <div class="contact-card" onclick="openProfileModal(${contact.id})">
+                                ${avatarHtml}
+                                <div class="card-details">
+                                    <h3>${contact.name}</h3>
+                                    <div class="badges">
+                                        <span class="badge"><i class="fa-solid fa-location-dot"></i> ${contact.city}</span>
+                                        ${tagBadge}
+                                        ${bdayBadge}
+                                    </div>
+                                    <div class="phone-text">${contact.phone}</div>
+                                </div>
+                                <div class="card-actions" onclick="event.stopPropagation()">
+                                    <a href="tel:${cleanPhone}" class="btn-action btn-call"><i class="fa-solid fa-phone"></i> חיוג</a>
+                                    <a href="sms:${cleanPhone}" class="btn-action btn-sms"><i class="fa-solid fa-comment-sms"></i> SMS</a>
+                                    ${emailLink}
+                                    <button class="btn-action btn-copy" onclick="copyPhoneNumber('${contact.phone}', event)"><i class="fa-solid fa-copy"></i> העתק</button>
+                                </div>
+                                <div class="card-edit-actions" onclick="event.stopPropagation()">
+                                    <button class="btn-sm-action" onclick="openRequestModal('edit', ${contact.id})"><i class="fa-solid fa-pen"></i> ערוך</button>
+                                    <button class="btn-sm-action" style="color:#ef4444;" onclick="openRequestModal('delete', ${contact.id})"><i class="fa-solid fa-trash"></i> הסר</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('') + `</div>`;
+                } else {
+                    htmlOutput += `
+                        <table class="contacts-table">
+                            <thead>
+                                <tr>
+                                    <th>תמונה</th>
+                                    <th>שם</th>
+                                    <th>עיר ותגית</th>
+                                    <th>טלפון</th>
+                                    <th>פעולות</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${catContacts.map(contact => {
+                                    const cleanPhone = contact.phone.replace(/-/g, '');
+                                    const initials = contact.name.split(' ').map(n => n[0]).join('.');
+                                    const miniImg = contact.image ? `<img src="${contact.image}" style="width:35px; height:35px; border-radius:50%; object-fit:cover;">` : `<div style="width:35px; height:35px; border-radius:50%; background:var(--primary-color); color:white; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700;">${initials}</div>`;
+                                    const tagInfo = contact.tag ? `<span class="badge badge-tag" style="display:inline-block; margin-right:5px;">${contact.tag}</span>` : '';
+                                    const mailAction = contact.email ? `<a href="mailto:${contact.email}" style="color:#d97706; margin-left:8px;" title="שלח מייל" onclick="event.stopPropagation()"><i class="fa-solid fa-envelope"></i></a>` : `<span style="color:#cbd5e1; margin-left:8px; cursor:not-allowed;" title="אין מייל זמין"><i class="fa-solid fa-envelope"></i></span>`;
+                                    
+                                    return `
+                                        <tr style="cursor:pointer;" onclick="openProfileModal(${contact.id})">
+                                            <td>${miniImg}</td>
+                                            <td><strong>${contact.name}</strong></td>
+                                            <td>${contact.city} ${tagInfo}</td>
+                                            <td><span style="font-weight:600; color:var(--primary-color);">${contact.phone}</span></td>
+                                            <td onclick="event.stopPropagation()">
+                                                <a href="tel:${cleanPhone}" style="color:#2563eb; margin-left:8px;" title="חיוג מהיר"><i class="fa-solid fa-phone"></i></a>
+                                                <a href="sms:${cleanPhone}" style="color:#0d9488; margin-left:8px;" title="שלח SMS"><i class="fa-solid fa-comment-sms"></i></a>
+                                                ${mailAction}
+                                                <button onclick="copyPhoneNumber('${contact.phone}', event)" style="border:none; background:none; cursor:pointer; color:#64748b; margin-left:8px;" title="העתק מספר"><i class="fa-solid fa-copy"></i></button>
+                                                <button onclick="openRequestModal('edit', ${contact.id})" style="border:none; background:none; cursor:pointer; color:#d97706; margin-left:5px;"><i class="fa-solid fa-pen"></i></button>
+                                                <button onclick="openRequestModal('delete', ${contact.id})" style="border:none; background:none; cursor:pointer; color:#ef4444;"><i class="fa-solid fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    `;
+                }
+            });
+
+            container.innerHTML = htmlOutput;
+        }
+
+        function setFilter(filterVal, btnElement) {
+            currentFilter = filterVal;
+            document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+            filterContacts();
+        }
+
+        function filterContacts() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const contacts = getStoredContacts();
+            
+            const filtered = contacts.filter(c => {
+                const matchesQuery = c.name.toLowerCase().includes(query) ||
+                                     c.city.toLowerCase().includes(query) ||
+                                     c.class.toLowerCase().includes(query) ||
+                                     (c.tag && c.tag.toLowerCase().includes(query)) ||
+                                     c.phone.includes(query) ||
+                                     (c.email && c.email.toLowerCase().includes(query));
+                
+                let matchesFilter = true;
+                if(currentFilter !== 'all') {
+                    matchesFilter = (c.class === currentFilter || c.tag === currentFilter);
+                }
+                return matchesQuery && matchesFilter;
+            });
+
+            renderContacts(filtered);
+        }
+
+        function toggleViewMode() {
+            currentView = currentView === 'grid' ? 'table' : 'grid';
+            document.getElementById('view-icon').className = currentView === 'grid' ? 'fa-solid fa-table-cells' : 'fa-solid fa-list';
+            document.getElementById('view-text').innerText = currentView === 'grid' ? 'תצוגת טבלה' : 'תצוגת קוביות';
+            filterContacts();
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            if(body.getAttribute('data-theme') === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        function openAdminPanel() {
+            const correctPass = localStorage.getItem('yeshiva_admin_pass') || 'rebbe770';
+            const pass = prompt('הכנס סיסמת מנהל:');
+            if(pass === null) return;
+            if(pass !== correctPass) { alert('סיסמה שגויה!'); return; }
+            document.getElementById('admin-panel').style.display = 'block';
+            updateAdminPanel();
+        }
+
+        function closeAdminPanel() { document.getElementById('admin-panel').style.display = 'none'; }
+
+        function updateAdminPassword() {
+            const newPass = document.getElementById('admin-new-pass').value.trim();
+            if(!newPass) { alert('נא להזין סיסמה'); return; }
+            localStorage.setItem('yeshiva_admin_pass', newPass);
+            document.getElementById('admin-new-pass').value = '';
+            addLog('סיסמת המנהל עודכנה');
+            alert('הסיסמה עודכנה בהצלחה!');
+        }
+
+        function openRequestModal(type, contactId) {
+            document.getElementById('req-type').value = type;
+            const modalTitle = document.getElementById('modal-title');
+            const contacts = getStoredContacts();
+            
+            document.getElementById('req-file').value = '';
+            document.getElementById('req-image-base64').value = '';
+
+            if(type === 'add') {
+                modalTitle.innerText = 'הוספת בחור חדש';
+                document.getElementById('req-original-id').value = '';
+                document.getElementById('req-name').value = '';
+                document.getElementById('req-city').value = '';
+                document.getElementById('req-birthday').value = '';
+                document.getElementById('req-phone').value = '';
+                document.getElementById('req-email').value = '';
+            } else {
+                modalTitle.innerText = type === 'edit' ? 'עדכון פרטי בחור' : 'הסרת בחור';
+                const contact = contacts.find(c => c.id === contactId);
+                if (!contact) return;
+                document.getElementById('req-original-id').value = contact.id;
+                document.getElementById('req-name').value = contact.name;
+                document.getElementById('req-city').value = contact.city;
+                document.getElementById('req-class').value = contact.class;
+                document.getElementById('req-tag').value = contact.tag || '';
+                document.getElementById('req-birthday').value = contact.birthday || '';
+                document.getElementById('req-phone').value = contact.phone;
+                document.getElementById('req-email').value = contact.email || '';
+                document.getElementById('req-image-base64').value = contact.image || '';
+            }
+            document.getElementById('requestModal').style.display = 'flex';
+        }
+
+        function closeRequestModal() { document.getElementById('requestModal').style.display = 'none'; }
+
+        function openProfileModal(contactId) {
+            const contacts = getStoredContacts();
+            const contact = contacts.find(c => c.id === contactId);
+            if(!contact) return;
+
+            const cleanPhone = contact.phone.replace(/-/g, '');
+            const initials = contact.name.split(' ').map(n => n[0]).join('.');
+            const avatarArea = document.getElementById('profile-modal-avatar-area');
+
+            if(contact.image) {
+                avatarArea.innerHTML = `<img src="${contact.image}" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:3px solid var(--accent-color);">`;
+            } else {
+                avatarArea.innerHTML = `<div style="width:100px; height:100px; border-radius:50%; background:var(--primary-color); color:white; display:flex; align-items:center; justify-content:center; font-size:2rem; font-weight:700; border:3px solid var(--accent-color);">${initials}</div>`;
+            }
+
+            document.getElementById('profile-modal-name').innerText = contact.name;
+            document.getElementById('profile-modal-city').innerHTML = `<i class="fa-solid fa-location-dot"></i> ${contact.city}`;
+            document.getElementById('profile-modal-class').innerHTML = `<i class="fa-solid fa-folder"></i> ${contact.class}`;
+            
+            const tagEl = document.getElementById('profile-modal-tag');
+            if(contact.tag) {
+                tagEl.style.display = 'inline-block';
+                tagEl.innerHTML = `<i class="fa-solid fa-tag"></i> ${contact.tag}`;
+            } else {
+                tagEl.style.display = 'none';
+            }
+
+            const bdayEl = document.getElementById('profile-modal-birthday');
+            if(contact.birthday) {
+                bdayEl.style.display = 'inline-block';
+                bdayEl.innerHTML = `<i class="fa-solid fa-cake-candles"></i> יום הולדת: ${contact.birthday}`;
+            } else {
+                bdayEl.style.display = 'none';
+            }
+
+            document.getElementById('profile-modal-phone').innerText = contact.phone;
+            
+            const emailEl = document.getElementById('profile-modal-email');
+            if(contact.email) {
+                emailEl.innerText = contact.email;
+                emailEl.style.display = 'block';
+            } else {
+                emailEl.innerText = '';
+                emailEl.style.display = 'none';
+            }
+
+            document.getElementById('profile-modal-call').href = `tel:${cleanPhone}`;
+            document.getElementById('profile-modal-sms').href = `sms:${cleanPhone}`;
+            
+            const mailBtn = document.getElementById('profile-modal-mail');
+            if(contact.email) {
+                mailBtn.href = `mailto:${contact.email}`;
+                mailBtn.style.opacity = '1';
+                mailBtn.style.pointerEvents = 'auto';
+            } else {
+                mailBtn.href = '#';
+                mailBtn.style.opacity = '0.4';
+                mailBtn.style.pointerEvents = 'none';
+            }
+            
+            const copyBtn = document.getElementById('profile-modal-copy');
+            copyBtn.onclick = (e) => copyPhoneNumber(contact.phone, e);
+
+            document.getElementById('profileModal').style.display = 'flex';
+        }
+
+        function closeProfileModal() { document.getElementById('profileModal').style.display = 'none'; }
+
+        function submitContactRequest() {
+            const type = document.getElementById('req-type').value;
+            const originalId = document.getElementById('req-original-id').value;
+            const name = document.getElementById('req-name').value.trim();
+            const city = document.getElementById('req-city').value.trim();
+            const cls = document.getElementById('req-class').value;
+            const tag = document.getElementById('req-tag').value;
+            const birthday = document.getElementById('req-birthday').value.trim();
+            const phone = document.getElementById('req-phone').value.trim();
+            const email = document.getElementById('req-email').value.trim();
+            const image = document.getElementById('req-image-base64').value.trim();
+
+            if(!name || !phone) { alert('נא למלא שם וטלפון'); return; }
+
+            let pendingRequests = getStoredRequests();
+            pendingRequests.push({
+                id: Date.now(),
+                type,
+                originalId: originalId ? Number(originalId) : null,
+                contact: { name, city, class: cls, tag, birthday, phone, email, image }
+            });
+            localStorage.setItem('yeshiva_requests', JSON.stringify(pendingRequests));
+
+            updateReqCountBadge();
+            alert('הבקשה נשלחה לאישור מנהל!');
+            closeRequestModal();
+        }
+
+        function updateReqCountBadge() {
+            const pendingRequests = getStoredRequests();
+            const countEl = document.getElementById('req-count');
+            if(countEl) countEl.innerText = pendingRequests.length;
+        }
+
+        function updateAdminPanel() {
+            updateReqCountBadge();
+            const pendingRequests = getStoredRequests();
+            const listEl = document.getElementById('admin-requests-list');
+            const logsEl = document.getElementById('admin-logs-list');
+            const catListEl = document.getElementById('admin-categories-list');
+            const tagListEl = document.getElementById('admin-tags-list');
+            const usersListEl = document.getElementById('admin-users-list');
+
+            const registeredUsers = getStoredRegisteredUsers();
+            if(registeredUsers.length === 0) {
+                usersListEl.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.85rem; text-align: center; padding: 10px;">אין משתמשים רשומים כרגע.</p>';
+            } else {
+                usersListEl.innerHTML = registeredUsers.map(u => `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; border-bottom: 1px solid var(--border-color); font-size: 0.85rem;">
+                        <div>
+                            <strong>${u.firstName}</strong> (${u.email}) - טלפון: ${u.phone}
+                            <div style="font-size: 0.75rem; color: var(--text-secondary);">נרשם בתאריך: ${u.regTime}</div>
+                        </div>
+                        <button class="btn-reject" style="padding: 3px 8px; font-size: 0.75rem;" onclick="deleteRegisteredUser(${u.id})">מחק</button>
+                    </div>
+                `).join('');
+            }
+
+            const categories = getStoredCategories();
+            catListEl.innerHTML = categories.map(c => `
+                <span class="badge" style="padding: 6px 12px; font-size:0.9rem; display:flex; align-items:center; gap:6px;">
+                    ${c} 
+                    ${categories.length > 1 ? `<i class="fa-solid fa-xmark" style="cursor:pointer; color:#ef4444;" onclick="deleteCategory('${c}')"></i>` : ''}
+                </span>
+            `).join('');
+
+            const tags = getStoredTags();
+            tagListEl.innerHTML = tags.map(t => `
+                <span class="badge badge-tag" style="padding: 6px 12px; font-size:0.9rem; display:flex; align-items:center; gap:8px;">
+                    ${t} 
+                    <span style="display:inline-flex; gap:6px;">
+                        <i class="fa-solid fa-pen" style="cursor:pointer; color:var(--primary-color);" onclick="editTagName('${t}')" title="שנה שם תגית"></i>
+                        <i class="fa-solid fa-xmark" style="cursor:pointer; color:#ef4444;" onclick="deleteTag('${t}')" title="מחק תגית"></i>
+                    </span>
+                </span>
+            `).join('');
+
+            if(pendingRequests.length === 0) {
+                listEl.innerHTML = '<p style="color: var(--text-secondary);">אין בקשות ממתינות.</p>';
+            } else {
+                listEl.innerHTML = pendingRequests.map(req => `
+                    <div class="request-item">
+                        <div>
+                            <strong>${req.contact.name}</strong> (${req.contact.class}, ${req.contact.city}) - ${req.contact.phone}
+                        </div>
+                        <div class="req-buttons">
+                            <button class="btn-approve" onclick="approveRequest(${req.id})"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn-reject" onclick="rejectRequest(${req.id})"><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const logs = getStoredLogs();
+            if(logs.length === 0) {
+                logsEl.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.85rem; text-align: center; padding: 10px;">אין פעולות מתועדות.</p>';
+            } else {
+                logsEl.innerHTML = logs.map(l => `<div class="log-item"><span>${l.text}</span><span style="direction:ltr; font-size:0.75rem;">${l.time}</span></div>`).join('');
+            }
+        }
+
+        function deleteCategory(catName) {
+            if(!confirm(`האם למחוק את הקטגוריה "${catName}"?`)) return;
+            let categories = getStoredCategories();
+            categories = categories.filter(c => c !== catName);
+            localStorage.setItem('yeshiva_categories', JSON.stringify(categories));
+            addLog(`נמחקה הקטגוריה: ${catName}`);
+            refreshApp();
+            updateAdminPanel();
+        }
+
+        function deleteTag(tagName) {
+            if(!confirm(`האם למחוק את התגית "${tagName}"?`)) return;
+            let tags = getStoredTags();
+            tags = tags.filter(t => t !== tagName);
+            localStorage.setItem('yeshiva_tags', JSON.stringify(tags));
+            addLog(`נמחקה התגית: ${tagName}`);
+            refreshApp();
+            updateAdminPanel();
+        }
+
+        function approveRequest(id) {
+            let pendingRequests = getStoredRequests();
+            const req = pendingRequests.find(r => r.id === id);
+            if(!req) return;
+
+            let contacts = getStoredContacts();
+            if(req.type === 'add') {
+                contacts.push({ id: Date.now(), ...req.contact });
+                addLog(`אושרה הוספת: ${req.contact.name}`);
+            } else if(req.type === 'edit') {
+                const cIndex = contacts.findIndex(c => c.id === req.originalId);
+                if(cIndex !== -1) { contacts[cIndex] = { id: req.originalId, ...req.contact }; addLog(`אושר עדכון: ${req.contact.name}`); }
+            } else if(req.type === 'delete') {
+                contacts = contacts.filter(c => c.id !== req.originalId);
+                addLog(`אושרה הסרת איש קשר`);
+            }
+
+            localStorage.setItem('yeshiva_contacts', JSON.stringify(contacts));
+            localStorage.setItem('yeshiva_requests', JSON.stringify(pendingRequests.filter(r => r.id !== id)));
+            updateAdminPanel();
+            refreshApp();
+        }
+
+        function rejectRequest(id) {
+            let pendingRequests = getStoredRequests();
+            localStorage.setItem('yeshiva_requests', JSON.stringify(pendingRequests.filter(r => r.id !== id)));
+            updateAdminPanel();
+        }
+
+        function approveAllRequests() {
+            let pendingRequests = getStoredRequests();
+            pendingRequests.forEach(r => approveRequest(r.id));
+        }
+
+        function rejectAllRequests() {
+            localStorage.setItem('yeshiva_requests', JSON.stringify([]));
+            updateAdminPanel();
+        }
+    </script>
+</body>
+</html>
